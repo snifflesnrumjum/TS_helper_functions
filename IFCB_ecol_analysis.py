@@ -23,7 +23,7 @@ def run_PCA(in_data, num_dimen=2, distance_measure='braycurtis'):
        distance metric.
        
        Input:
-           in_data (df) = a pandas dataframe of several time series
+           in_data (DataFrame) = a pandas dataframe of several time series
            num_dimen (int) = number of dimensions in which to conduct the 
                        PCA (default: 2)
            distance_measure (str) = which distance metric should be used to 
