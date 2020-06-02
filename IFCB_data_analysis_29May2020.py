@@ -71,27 +71,27 @@ def get_manual_data(manual_dates, raw_data):
 
     
 #load the raw data files
-print "Loading ml_analyzed data...",
+print("Loading ml_analyzed data...", end=' ')
 ifcb3_ml_analyzed = []
 for ml_analy in summary_file_years:
-    print ml_analy,
+    print(ml_analy, end = ' ')
     ifcb3_ml_analyzed.append(scipy.io.loadmat(path_to_ml_files + ml_analyzed_ifcb3_prefix + ml_analy + '.mat'))
-print
+print()
 raw_summary = []
 ######use this section to load individual years of summary files
-print "Loading summary data...",
+print("Loading summary data...", end=' ')
 
 for summary in summary_file_years:
-    print summary,
+    print(summary, end = ' ')
     raw_summary.append(scipy.io.loadmat(path_to_summary_files + summary_file_prefix + summary + '.mat'))
 #######
-print
+print()
 
-print "loaded!"
+print("loaded!")
 #end of data loading
 
 #find the list of dates in both datasets
-print "Creating merged lists..."
+print("Creating merged lists...")
 merged_date_list = []
 merged_indexes = []
 all_mls = []
@@ -134,7 +134,7 @@ for x in range(len(all_dates)):
            
 missing_matdates_raw_summary.sort()
 
-print "Grabbed data indexes..."
+print("Grabbed data indexes...")
         
 filenumber = 1
 rf_classcountTB = []
@@ -143,7 +143,7 @@ rf_classcountTB_optthresh = []
 mls_analyzed = []
 for x in merged_indexes:
     if filenumber % 5000 == 0:
-        print filenumber,
+        print(filenumber, end=' ')
     
     rf_classcountTB.append(raw_summary[x[1][0]]['classcountTB'][x[1][1]])
     rf_classcountTB_optthresh.append(raw_summary[x[1][0]]['classcountTB_above_optthresh'][x[1][1]])
@@ -157,7 +157,7 @@ for x in merged_indexes:
             else:
                 mls_analyzed.append(np.nan)
         except:
-            print "didn't get ", x
+            print("didn't get ", x)
     filenumber += 1
 
 rf_classcountTB = np.array(rf_classcountTB).T
@@ -171,13 +171,13 @@ rf_classcounts.append(rf_classcountTB_optthresh / mls_analyzed)
 merged_dates = merged_date_list
 
 #finished with loading and appending the data 
-print "done!"
+print("done!")
 
 
 #####
 #####
 #making the time series variables
-print "Binning the data...",
+print("Binning the data...", end = '')
 binned_counts = []
 binned_concentrations = []
 binned_counts_opt = []
@@ -220,5 +220,5 @@ binned_concentrations.resample(bin_frequency).sum().to_csv(outfile_directory+'IF
 binned_concentrations_opt.resample(bin_frequency).sum().to_csv(outfile_directory+'IFCB_binned_concentrations_opt_thresh.csv')
 
 
-print "Done!"
+print("Done!")
 
