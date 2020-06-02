@@ -87,7 +87,7 @@ def grab_biovolume(in_feature, in_class, automated):
         #print 'Error occurred, skipping image:', image_cat
                 skipped_imgs += 1
         #raise
-        print 'skipped_images:', skipped_imgs, 
+        print('skipped_images:', skipped_imgs, end = ' ') 
         
         #now get the image counts for the categories
         counts = {cat:class_data.count(cat) for cat in sorted(category_list)}
@@ -231,8 +231,8 @@ if __name__ == '__main__':
     # grab the list of files from each directory
     list_of_feature_files = os.listdir(feature_path)
     list_of_class_files = os.listdir(class_path)
-    print "Feature files: {}".format(len(list_of_feature_files))
-    print "Class files  : {}".format(len(list_of_class_files))
+    print("Feature files: {}".format(len(list_of_feature_files)))
+    print("Class files  : {}".format(len(list_of_class_files)))
     
     #create the output dataframe for counts summary
     #first get the category list
@@ -248,7 +248,7 @@ if __name__ == '__main__':
     for class_index, indiv_file in enumerate(list_of_class_files):
         if indiv_file[-3:] == 'mat':
             if not date_limiter or date_limiter == indiv_file[:len(date_limiter)]:
-                print "Processing {}...".format(indiv_file),
+                print("Processing {}...".format(indiv_file), end=' ')
                 
                 features_found = True
                # try:
@@ -258,15 +258,15 @@ if __name__ == '__main__':
                         feature_index += 1
                         if feature_index >= len(list_of_feature_files)-1:
                             #raise ValueError("The feature file was not found") #this will error out and stop the program
-                            print "feature file not found."
+                            print("feature file not found.")
                             features_found = False
-                            print list_of_feature_files[feature_index][:21], indiv_file[:21] 
+                            print(list_of_feature_files[feature_index][:21], indiv_file[:21] )
                             continue
                     if features_found:
                         temp_biovolumes = grab_biovolume(list_of_feature_files.pop(feature_index), list_of_class_files[class_index], automated_or_manual)
                         #temp_biovolumes.to_csv(outpath + indiv_file[:-3] + 'csv')
                         
-                        print "done!"
+                        print("done!")
                     temp_counts = grab_class_counts(list_of_class_files[class_index], automated_or_manual, category_list)
                     temp_timestamp = list_of_class_files[class_index]
                     if temp_timestamp[0] == 'D':
