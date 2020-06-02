@@ -21,6 +21,12 @@ summary_file_years = list(config_in['years'].split(','))
 path_to_ml_files = config_in['ml_analyzed_directory']
 ml_analyzed_ifcb3_prefix = config_in['ml_analyzed_prefix']
 
+#convert string to boolean
+if config_in['bin_files'] == 'True':
+    bin_files = True
+else:
+    bin_files = False
+    
 bin_frequency = config_in['bin_frequency']
 
 #have to convert the string into a boolean
